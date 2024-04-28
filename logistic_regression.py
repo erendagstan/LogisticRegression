@@ -45,6 +45,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix, classification_report # , plot_roc_curve
 from sklearn.metrics import RocCurveDisplay
 from sklearn.model_selection import train_test_split, cross_validate
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 
 def outlier_thresholds(dataframe, col_name, q1=0.05, q3=0.95):
     quartile1 = dataframe[col_name].quantile(q1)
@@ -77,7 +78,7 @@ pd.set_option('display.width', 500)
 # Exploratory Data Analysis
 ######################################################
 
-df = pd.read_csv("MachineLearning/machine_learning/datasets/diabetes.csv")
+df = pd.read_csv("diabetes.csv")
 
 ##########################
 # Target'ın Analizi
@@ -171,18 +172,19 @@ y_pred[0:10]
 
 y[0:10]
 
+accuracy_test = accuracy_score(y, y_pred)
+precision_test = precision_score(y, y_pred)
+recall_test = recall_score(y, y_pred)
+f1_test = f1_score(y, y_pred)
+roc_auc_test = roc_auc_score(y, log_model.predict_proba(X)[:, 1])
 
-
-
-
-
-
-
-
-
-
-
-
+# Print the test scores
+print("Test Scores:")
+print("Accuracy:", accuracy_test)
+print("Precision:", precision_test)
+print("Recall:", recall_test)
+print("F1-score:", f1_test)
+print("ROC AUC:", roc_auc_test)
 
 
 
